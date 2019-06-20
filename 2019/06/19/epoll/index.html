@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>epoll | Hexo</title>
+  <title>epoll 多路IO复用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="epoll">
+  <meta name="description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #define EPOLL_SIZE 1024int main(int argc, char *argv[]){     if(argc &amp;lt; 2)    {        printf(“argc &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="epoll 多路IO复用">
 <meta property="og:url" content="http://yoursite.com/2019/06/19/epoll/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #define EPOLL_SIZE 1024int main(int argc, char *argv[]){     if(argc &amp;lt; 2)    {        printf(“argc &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-19T06:46:12.491Z">
+<meta property="og:updated_time" content="2019-06-20T01:54:41.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="epoll">
+<meta name="twitter:title" content="epoll 多路IO复用">
+<meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #define EPOLL_SIZE 1024int main(int argc, char *argv[]){     if(argc &amp;lt; 2)    {        printf(“argc &amp;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,7 +161,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      epoll
+      epoll 多路IO复用
     </h1>
   
 
@@ -171,7 +174,122 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;sys/epoll.h&gt;</p>
+<p>#include “wrap.h”</p>
+<p>#include &lt;fcntl.h&gt;</p>
+<p>#define EPOLL_SIZE 1024<br>int main(int argc, char *argv[])<br>{
+    if(argc &lt; 2)<br>    {<br>        printf(“argc &lt;2   :  ./a.out port \n”);<br>        return 0;</p>
+<pre><code>}
+// 创建套接字
+int lfd = tcp4bind( atoi(argv[1]),NULL );
+// 绑定 
+// 监听
+Listen(lfd,128);
+// 创建树
+int epfd = epoll_create(1);
+// 将lfd上树监听
+struct epoll_event ev,evs[EPOLL_SIZE];
+ev.data.fd = lfd;
+ev.events = EPOLLIN;
+epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&amp;ev);
+// while循环监听树的文件描述符 
+while(1)
+{
+    //监听文件描述符的属性变化
+    int n = epoll_wait(epfd,evs,EPOLL_SIZE,-1);
+    printf(&quot;-----------epoll_wait-----------\n&quot;);
+    if(n &lt; 0)
+    {
+        perror(&quot;&quot;);
+        break;
+
+    }
+    else if( n &gt;= 0 )
+    {
+
+        for(int i=0;i&lt;n;i++)
+        {
+            int fd = evs[i].data.fd;
+            //如果是lfd变化,并且是读事件变化
+            if(fd == lfd &amp;&amp; evs[i].events &amp; EPOLLIN )   
+            {
+                struct sockaddr_in cliaddr;
+                socklen_t len = sizeof(cliaddr);
+
+                char ip[INET_ADDRSTRLEN]=&quot;&quot;;
+                // 提取新的连接
+                int cfd = Accept(lfd,(struct sockaddr*)&amp;cliaddr,&amp;len);
+
+                printf(&quot;client ip=%s port=%d\n&quot;,inet_ntop(AF_INET,&amp;cliaddr.sin_addr.s_addr,ip,INET_ADDRSTRLEN),
+                       ntohs(cliaddr.sin_port));
+                //设置cfd的阻塞特性为非阻塞
+                int flag = fcntl(cfd,F_GETFL);
+                flag |= O_NONBLOCK;
+                fcntl(cfd,F_SETFL,flag);
+                // 将cfd上树
+                ev.data.fd = cfd;
+                ev.events = EPOLLIN | EPOLLET;
+                //上树
+                epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&amp;ev);
+
+            }
+            else if( evs[i].events &amp; EPOLLIN )//一定是cfd变化,在确认一下是不是cfd的读事件变化了
+            {
+                while(1)
+                {
+                    // cfd的读事件变化  读取客户端发过来的消息
+                    char buf[4]=&quot;&quot;;
+                    int count = Read(fd, buf,sizeof(buf));//阻塞
+                    //如果read读的缓冲区没有数据,read的返回值是-1 errno的值会被设置成EAGAIN
+                    if(count &lt; 0)
+                    {
+                        if(errno == EAGAIN)
+                        {
+                            break;
+
+                        }
+                        //出错 下树
+                        perror(&quot;&quot;);
+                        close(fd);
+                        epoll_ctl(epfd,EPOLL_CTL_DEL,fd,&amp;evs[i]);
+                        break;
+
+                    }
+                    else if(count == 0)
+                    {
+                        //客户端关闭, 下树
+                        printf(&quot;client close\n&quot;);
+                        close(fd);
+                        epoll_ctl(epfd,EPOLL_CTL_DEL,fd,&amp;evs[i]);
+                        break;
+
+
+                    }
+                    else
+                    {
+
+                        write(STDOUT_FILENO,buf,count);
+                        Write(fd,buf,count);
+
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+    }
+
+
+}
+return 0;</code></pre><p>}</p>
+
       
 
       
