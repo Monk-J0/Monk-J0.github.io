@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>tcp三次握手 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handshak">
+  <meta name="description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞 等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handsha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tcp三次握手">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/tcp三次握手/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handshak">
+<meta property="og:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞 等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handsha">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T11:39:34.486Z">
+<meta property="og:updated_time" content="2019-06-21T12:00:48.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp三次握手">
-<meta name="twitter:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handshak">
+<meta name="twitter:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞 等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handsha">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -167,53 +167,45 @@
 
         
         <a href="/2019/06/21/tcp三次握手/" class="archive-article-date">
-  	<time datetime="2019-06-21T11:38:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+  	<time datetime="2019-06-21T11:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。</p>
+        <p>1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞</p>
+<p>等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。</p>
 <p>2、三次握手Three-way Handshake  （建立一个TCP连接）</p>
 <p>一个虚拟连接的建立是通过三次握手来实现的  </p>
 <ol>
-<li>(B) –&gt; [SYN] –&gt; (A)  </li>
+<li><p>(B) –&gt; [SYN] –&gt; (A)  </p>
+<p> 假如服务器A和客户机B通讯. 当A要和B通信时，B首先向A发一个SYN (Synchronize) 标记的包，告诉A请求建立连接.  </p>
+<p> 注意: 一个 SYN包就是仅SYN标记设为1的TCP包(参见TCP包头Resources). 认识   到这点很重要，只有当A受到B发来的SYN包，才可建立连接，除此之外别无他法。因此，</p>
+<p> 如果你的防火墙丢弃所有的发往外网接口的SYN包，那么你将不能让外部任何主机主动建立连接。  </p>
+</li>
 </ol>
-<p>假如服务器A和客户机B通讯. 当A要和B通信时，B首先向A发一个SYN (Synchronize) </p>
-<pre><code>标记的包，告诉A请求建立连接.  
-
-注意: 一个 SYN包就是仅SYN标记设为1的TCP包(参见TCP包头Resources). 认识
-
-到这点很重要，只有当A受到B发来的SYN包，才可建立连接，除此之外别无他法。因此，
-
-如果你的防火墙丢弃所有的发往外网接口的SYN包，那么你将不能让外部任何主机主动建
-
-立连接。  </code></pre><ol>
+<ol>
 <li><p>(B) &lt;– [SYN/ACK] &lt;–(A)  </p>
-<p> 接着，A收到后会发一个对SYN包的确认包(SYN/ACK)回去，表示对第一个SYN包的确</p>
-<p> 认，并继续握手操作.  </p>
+<p> 接着，A收到后会发一个对SYN包的确认包(SYN/ACK)回去，表示对第一个SYN包的确   认，并继续握手操作.  </p>
 <p> 注意: SYN/ACK包是仅SYN 和 ACK 标记为1的包.  </p>
 </li>
 </ol>
 <ol>
 <li><p>(B) –&gt; [ACK] –&gt; (A)  </p>
-<p> B收到SYN/ACK 包,B发一个确认包(ACK)，通知A连接已建立。至此，三次握手完成，</p>
-<p> 一个TCP连接完成  </p>
-<p> Note: ACK包就是仅ACK 标记设为1的TCP包. 需要注意的是当三此握手完成、连接建</p>
-<p> 立以后，TCP连接的每个包都会设置ACK位  </p>
-<p> 这就是为何连接跟踪很重要的原因了. 没有连接跟踪,防火 墙将无法判断收到的ACK包是否</p>
-<p> 属于一个已经建立的连接.一般的包过滤(Ipchains)收到ACK包时,会让它通过(这绝对不</p>
-<pre><code>是个好主意). 而当状态型防火墙收到此种包时，它会先在连接表中查找是否属于哪个已建</code></pre><p> 连接，否则丢弃该包  </p>
-<p> 补充知识点：</p>
-<p> TCP报文中的序列号（32 位 一个包的序号，且称为seq）和确认号（32位 确认对方发给我的数据包的确        认号，且称为ack）</p>
-<p> （确认号的两层含义(承上启下)1、确认收到上一次（对方）发送给我的数据；2、期待对方下一次报文中的序列号   为我的确认号。Ack = 对方（上一次）发送的报文序列号 + SYN标志位的长度 + 数据长度）</p>
+<p> B收到SYN/ACK 包,B发一个确认包(ACK)，通知A连接已建立。至此，三次握手完成，   一个TCP连接完成  </p>
+<p> Note: ACK包就是仅ACK 标记设为1的TCP包. 需要注意的是当三此握手完成、连接建   立以后，TCP连接的每个包都会设置ACK位  </p>
+<p> 这就是为何连接跟踪很重要的原因了. 没有连接跟踪,防火 墙将无法判断收到的ACK包是否属于一个已经建立的连接.一般的包过滤(Ipchains)收到ACK包时,会让它通过(这绝对不</p>
+<pre><code>是个好主意). 而当状态型防火墙收到此种包时，它会先在连接表中查找是否属于哪个已建连接，否则丢弃该包  </code></pre><p> 补充知识点：</p>
+<p> TCP报文中的序列号（32 位 一个包的序号，且称为seq）和确认号（32位 确认对方发给我的数据包的确认号，且称为ack）</p>
+<p> （确认号的两层含义(承上启下)1、确认收到上一次（对方）发送给我的数据；2、期待对方下一次报文中的序列号   为我的确认号。Ack = 对方（上一次）发送的报文序列号 + SYN</p>
+<p> 标志位的长度 + 数据长度）</p>
 <p> 第一次发送数据包时，即(B) –&gt; [SYN] –&gt; (A)  时seq = “随机整数值X”；ack没有其他进程发包给自己所以ack=0;</p>
 <p> 第二次发送数据包时（即 (B) &lt;– [SYN/ACK] &lt;–(A) ）；seq = “随机整数值Y”；ack = X+1+0;</p>
 <p> 第三次发送数据包时（即(B) –&gt; [ACK] –&gt; (A)）；seq = X+1+0;(即上一次报文的确认号)；ack = Y+1+0;(即上一次报文中的序列号+SYN标志位长度+数据长度)</p>
 </li>
 </ol>
-<pre><code>-----收藏自网友</code></pre>
+
       
 
       
