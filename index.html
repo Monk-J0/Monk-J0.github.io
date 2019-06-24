@@ -157,7 +157,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#include &lt;stdio.h&gt;</p>
+        <hr>
+<p>title: web_server<br>date: 2019-06-21 20:06:10</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>#include &lt;stdio.h&gt;</p>
 <p>#include &lt;sys/epoll.h&gt;</p>
 <p>#include “wrap.h”</p>
 <p>#include &lt;fcntl.h&gt;</p>
@@ -259,7 +261,7 @@ else
 }
 //收尾
 return 0;</code></pre><p>}</p>
-<pre><code></code></pre>
+
       
 
       
@@ -272,155 +274,6 @@ return 0;</code></pre><p>}</p>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/06/24/web-server/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-http_server" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;sys/epoll.h&gt;</p>
-<p>#include “wrap.h”</p>
-<p>#include &lt;fcntl.h&gt;</p>
-<p>#include &lt;dirent.h&gt;</p>
-<p>#include “pub.h”</p>
-<p>#include &lt;signal.h&gt;</p>
-<p>#include &lt;sys/stat.h&gt;</p>
-<p>#define PORT 8888</p>
-<p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
-    char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);<br>    //文件大小<br>    if(length &gt; 0)<br>    {<br>        len = sprintf(buf,”Content-Length:%d\r\n”,length);<br>        send(cfd,buf,len,0);<br>    }<br>    //空行<br>    send(cfd,”\r\n”,2,0);</p>
-<p>}
-void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>{
-    int fd = open(pathname,O_RDWR);<br>    if(fd &lt; 0)<br>    {<br>        perror(“”);<br>        return ;<br>    }<br>    while(1)<br>    {<br>        char buf[1024]=””;<br>        int n = read(fd,buf,sizeof(buf));<br>        if(n &lt;=0)<br>            break;</p>
-<pre><code>    int count = send(cfd,buf,n,0);
-    printf(&quot;count =%d\n&quot;,count);
-}
-close(fd);
-
-if(flag == 1)
-{
-
-    close(cfd);
-    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
-
-}</code></pre><p>}
-void client_request(struct epoll_event *ev,int epfd)<br>{
-    int cfd = ev-&gt;data.fd;<br>    char buf[1024]=””;<br>    char tmp[1024]=””;<br>    int n = Readline(cfd,buf,sizeof(buf));<br>    if(n &lt;= 0)<br>    {<br>        close(cfd);<br>        epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);<br>    }</p>
-<p>//    printf(“buf=[%s]\n”,buf);<br>    //将缓冲读干净<br>    while( (n=Readline(cfd,tmp,sizeof(tmp))) &gt; 0);<br>    //GET /  HTTP1.1\R\N<br>    char mothod[256],content[256];<br>    sscanf(buf,”%[^ ] %[^ ]”,mothod,content);<br>    printf(“[%s]   [%s]\n”,mothod,content);<br>    //如果是get请求处理<br>    if( strcasecmp(mothod,”get”) == 0)<br>    {<br>        // %e8%b8%…txt<br>        char <em>strfile = content+1;<br>        strdecode( strfile,strfile);<br>        if(</em>strfile == 0)<br>            strfile = “./“;//如果没有请求文件,默认请求当前目录<br>        //判断请求的文件是否存在<br>        struct stat s;<br>        int ret = stat(strfile,&amp;s);<br>        if(ret &lt; 0)//文件不存在<br>        {<br>            //发送信息头<br>        //void send_header(int cfd ,int code,char <em>info,char *filetype,int length)<br>        send_header(cfd,404,”NOT FOUND”,get_mime_type(“</em>.html”),0);<br>        //void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>        //发送error.html<br>        send_file(cfd,ev,”error.html”,1,epfd);</p>
-<pre><code>    }
-    else//文件存在
-    {
-        //如果是一个常规文件
-        if(S_ISREG(s.st_mode))
-        {
-            //发送信息头
-            send_header(cfd,200,&quot;OK&quot;,get_mime_type(strfile),s.st_size);
-            //发送文件内容
-
-            send_file(cfd,ev,strfile,1,epfd);
-        }
-        else if(S_ISDIR(s.st_mode))//如果是一个目录
-        {
-            //发送信息头
-             send_header(cfd,200,&quot;OK&quot;,get_mime_type(&quot;*.html&quot;),0);
-            //发送dir_header.html
-            send_file(cfd,ev,&quot;dir_header.html&quot;,0,epfd);
-            //发送列表
-            //先要得到 目录下的文件名
-            struct dirent **list;
-            int size = scandir(strfile,&amp;list,NULL,alphasort);
-            for(int i=0;i&lt;size;i++)
-            {
-                // list[i]-&gt;d_name
-                char buff[256]=&quot;&quot;;
-                int len =0;
-                if( list[i]-&gt;d_type == DT_DIR)
-                {
-                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s/&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
-
-                }
-                else
-                {
-                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
-                }
-                send(cfd,buff,len,0);
-                free(list[i]);
-            }
-            free(list);
-
-            //发送dir_tail.html
-            send_file(cfd,ev,&quot;dir_tail.html&quot;,1,epfd);
-
-
-        }
-
-    }
-}
-else
-{
-    //其他请求 暂时不处理
-    close(cfd);
-    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
-
-
-}</code></pre><p>}</p>
-<p>int main(int argc, char <em>argv[])<br>{
-    signal(SIGPIPE,SIG_IGN);<br>    //切换工作路径<br>    char path[256]=””;<br>    char *pwd = getenv(“PWD”);<br>    ///home/itheima/share/shangc++01/1617day<br>    strcpy(path,pwd);<br>    strcat(path,”/web-http”);<br>    chdir(path);<br>    //创建套接字 绑定<br>    int lfd = tcp4bind(PORT,NULL);<br>    //监听<br>    Listen(lfd,128);<br>    //创建树<br>    int epfd = epoll_create(1);<br>    //lfd上树<br>    struct epoll_event ev,evs[EPOLL_SIZE];<br>    ev.data.fd = lfd;<br>    ev.events = EPOLLIN;<br>    epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&amp;ev);<br>    //循环监听<br>    while(1)<br>    {<br>        int n = epoll_wait(epfd,evs,EPOLL_SIZE,-1);<br>        if(n &lt; 0)<br>        {<br>            perror(“”);<br>            break;<br>        }<br>        else<br>        {<br>            for(int i=0;i&lt;n;i++)<br>            {<br>                // lfd变化<br>                if(evs[i].data.fd == lfd &amp;&amp; evs[i].events &amp; EPOLLIN)<br>                {<br>                    struct sockaddr_in cliaddr;<br>                    char ip[INET_ADDRSTRLEN]=””;<br>                    socklen_t len = sizeof(cliaddr);<br>                    //提取链接<br>                    int cfd = Accept(lfd,(struct sockaddr</em>)&amp;cliaddr,&amp;len);<br>                    printf(“client ip=%s port=%d\n”,<br>                            inet_ntop(AF_INET,&amp;cliaddr.sin_addr.s_addr,ip,INET_ADDRSTRLEN),<br>                            ntohs(cliaddr.sin_port));<br>                    //cfd设置为非阻塞<br>                    int flag = fcntl(cfd,F_GETFL);<br>                    flag |= O_NONBLOCK;<br>                    fcntl(cfd,F_SETFL,flag);<br>                    //cfd上树监听<br>                    ev.data.fd = cfd;<br>                    ev.events = EPOLLIN;<br>                    epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&amp;ev);</p>
-<pre><code>            }
-            else if( evs[i].events &amp; EPOLLIN)//cfd变化
-            {
-                client_request(&amp;evs[i],epfd);
-
-            }
-
-
-        }
-
-    }
-}
-//收尾
-return 0;</code></pre><p>}</p>
-<pre><code></code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/24/http_server/">展开全文 >></a>
         </p>
       
 
