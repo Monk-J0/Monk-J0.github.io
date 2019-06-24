@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+  <meta name="description" content="title: http_serverdate: 2019-06-24 20:35:20 tags:#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2019/06/24/http_server/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:description" content="title: http_serverdate: 2019-06-24 20:35:20 tags:#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-24T12:43:42.528Z">
+<meta property="og:updated_time" content="2019-06-24T12:52:33.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta name="twitter:description" content="title: http_serverdate: 2019-06-24 20:35:20 tags:#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -159,9 +159,111 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/epoll.h&gt;</span><br><span class="line">#include &quot;wrap.h&quot;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;dirent.h&gt;</span><br><span class="line">#include &quot;pub.h&quot;</span><br><span class="line">#include &lt;signal.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#define PORT 8888</span><br><span class="line">#define EPOLL_SIZE 1024</span><br><span class="line">void send_header(int cfd ,int code,char *info,char *filetype,int length)</span><br><span class="line">&#123;</span><br><span class="line">	char buf[1024]=&quot;&quot;;</span><br><span class="line">	//发送状态行</span><br><span class="line">	int len = sprintf(buf,&quot;HTTP/1.1 %d %s\r\n&quot;,code,info);</span><br><span class="line">	send(cfd,buf,len,0);</span><br><span class="line">	//状态信息 文件类型</span><br><span class="line">	len = sprintf(buf,&quot;Content-Type:%s\r\n&quot;,filetype);</span><br><span class="line">	send(cfd,buf,len,0);</span><br><span class="line">	//文件大小</span><br><span class="line">	if(length &gt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		len = sprintf(buf,&quot;Content-Length:%d\r\n&quot;,length);</span><br><span class="line">		send(cfd,buf,len,0);</span><br><span class="line">	&#125;</span><br><span class="line">	//空行</span><br><span class="line">	send(cfd,&quot;\r\n&quot;,2,0);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)</span><br><span class="line">&#123;</span><br><span class="line">	int fd = open(pathname,O_RDWR);</span><br><span class="line">	if(fd &lt; 0)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(&quot;&quot;);</span><br><span class="line">		return ;</span><br><span class="line">	&#125;</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		char buf[1024]=&quot;&quot;;</span><br><span class="line">		int n = read(fd,buf,sizeof(buf));</span><br><span class="line">		if(n &lt;=0)</span><br><span class="line">			break;</span><br><span class="line">		</span><br><span class="line">		int count = send(cfd,buf,n,0);</span><br><span class="line">		printf(&quot;count =%d\n&quot;,count);</span><br><span class="line">	&#125;</span><br><span class="line">	close(fd);</span><br><span class="line"></span><br><span class="line">	if(flag == 1)</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		close(cfd);</span><br><span class="line">		epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">void client_request(struct epoll_event *ev,int epfd)</span><br><span class="line">&#123;</span><br><span class="line">	int cfd = ev-&gt;data.fd;</span><br><span class="line">	char buf[1024]=&quot;&quot;;</span><br><span class="line">	char tmp[1024]=&quot;&quot;;</span><br><span class="line">	int n = Readline(cfd,buf,sizeof(buf));</span><br><span class="line">	if(n &lt;= 0)</span><br><span class="line">	&#123;</span><br><span class="line">		close(cfd);</span><br><span class="line">		epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">//	printf(&quot;buf=[%s]\n&quot;,buf);</span><br><span class="line">	//将缓冲读干净</span><br><span class="line">	while( (n=Readline(cfd,tmp,sizeof(tmp))) &gt; 0);</span><br><span class="line">	//GET /  HTTP1.1\R\N</span><br><span class="line">	char mothod[256],content[256];</span><br><span class="line">	sscanf(buf,&quot;%[^ ] %[^ ]&quot;,mothod,content);</span><br><span class="line">	printf(&quot;[%s]   [%s]\n&quot;,mothod,content);</span><br><span class="line">	//如果是get请求处理</span><br><span class="line">	if( strcasecmp(mothod,&quot;get&quot;) == 0)</span><br><span class="line">	&#123;</span><br><span class="line">		// %e8%b8%...txt</span><br><span class="line">		char *strfile = content+1;</span><br><span class="line">		strdecode( strfile,strfile);</span><br><span class="line">		if(*strfile == 0)</span><br><span class="line">			strfile = &quot;./&quot;;//如果没有请求文件,默认请求当前目录</span><br><span class="line">		//判断请求的文件是否存在</span><br><span class="line">		struct stat s;</span><br><span class="line">		int ret = stat(strfile,&amp;s);</span><br><span class="line">		if(ret &lt; 0)//文件不存在</span><br><span class="line">		&#123;</span><br><span class="line">			//发送信息头</span><br><span class="line">		//void send_header(int cfd ,int code,char *info,char *filetype,int length)</span><br><span class="line">		send_header(cfd,404,&quot;NOT FOUND&quot;,get_mime_type(&quot;*.html&quot;),0);</span><br><span class="line">		//void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)</span><br><span class="line">		//发送error.html</span><br><span class="line">		send_file(cfd,ev,&quot;error.html&quot;,1,epfd);</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">		else//文件存在</span><br><span class="line">		&#123;</span><br><span class="line">			//如果是一个常规文件</span><br><span class="line">			if(S_ISREG(s.st_mode))</span><br><span class="line">			&#123;</span><br><span class="line">				//发送信息头</span><br><span class="line">				send_header(cfd,200,&quot;OK&quot;,get_mime_type(strfile),s.st_size);</span><br><span class="line">				//发送文件内容</span><br><span class="line">			</span><br><span class="line">				send_file(cfd,ev,strfile,1,epfd);</span><br><span class="line">			&#125;</span><br><span class="line">			else if(S_ISDIR(s.st_mode))//如果是一个目录</span><br><span class="line">			&#123;</span><br><span class="line">				//发送信息头</span><br><span class="line">			 	send_header(cfd,200,&quot;OK&quot;,get_mime_type(&quot;*.html&quot;),0);</span><br><span class="line">				//发送dir_header.html</span><br><span class="line">				send_file(cfd,ev,&quot;dir_header.html&quot;,0,epfd);</span><br><span class="line">				//发送列表</span><br><span class="line">				//先要得到 目录下的文件名</span><br><span class="line">				struct dirent **list;</span><br><span class="line">				int size = scandir(strfile,&amp;list,NULL,alphasort);</span><br><span class="line">				for(int i=0;i&lt;size;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					// list[i]-&gt;d_name</span><br><span class="line">					char buff[256]=&quot;&quot;;</span><br><span class="line">					int len =0;</span><br><span class="line">					if( list[i]-&gt;d_type == DT_DIR)</span><br><span class="line">					&#123;</span><br><span class="line">						len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s/&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);</span><br><span class="line">					</span><br><span class="line">					&#125;</span><br><span class="line">					else</span><br><span class="line">					&#123;</span><br><span class="line">						len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);</span><br><span class="line">					&#125;</span><br><span class="line">					send(cfd,buff,len,0);</span><br><span class="line">					free(list[i]);</span><br><span class="line">				&#125;</span><br><span class="line">				free(list);</span><br><span class="line"></span><br><span class="line">				//发送dir_tail.html</span><br><span class="line">				send_file(cfd,ev,&quot;dir_tail.html&quot;,1,epfd);</span><br><span class="line"></span><br><span class="line">			</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		//其他请求 暂时不处理</span><br><span class="line">		close(cfd);</span><br><span class="line">		epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">					</span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">	signal(SIGPIPE,SIG_IGN);</span><br><span class="line">	//切换工作路径</span><br><span class="line">	char path[256]=&quot;&quot;;</span><br><span class="line">	char *pwd = getenv(&quot;PWD&quot;);</span><br><span class="line">	///home/itheima/share/shangc++01/1617day</span><br><span class="line">	strcpy(path,pwd);</span><br><span class="line">	strcat(path,&quot;/web-http&quot;);</span><br><span class="line">	chdir(path);</span><br><span class="line">	//创建套接字 绑定</span><br><span class="line">	int lfd = tcp4bind(PORT,NULL);</span><br><span class="line">	//监听</span><br><span class="line">	Listen(lfd,128);</span><br><span class="line">	//创建树</span><br><span class="line">	int epfd = epoll_create(1);</span><br><span class="line">	//lfd上树</span><br><span class="line">	struct epoll_event ev,evs[EPOLL_SIZE];</span><br><span class="line">	ev.data.fd = lfd;</span><br><span class="line">	ev.events = EPOLLIN;</span><br><span class="line">	epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&amp;ev);</span><br><span class="line">	//循环监听</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		int n = epoll_wait(epfd,evs,EPOLL_SIZE,-1);</span><br><span class="line">		if(n &lt; 0)</span><br><span class="line">		&#123;</span><br><span class="line">			perror(&quot;&quot;);</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=0;i&lt;n;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				// lfd变化</span><br><span class="line">				if(evs[i].data.fd == lfd &amp;&amp; evs[i].events &amp; EPOLLIN)</span><br><span class="line">				&#123;</span><br><span class="line">					struct sockaddr_in cliaddr;</span><br><span class="line">					char ip[INET_ADDRSTRLEN]=&quot;&quot;;</span><br><span class="line">					socklen_t len = sizeof(cliaddr);</span><br><span class="line">					//提取链接</span><br><span class="line">					int cfd = Accept(lfd,(struct sockaddr*)&amp;cliaddr,&amp;len);</span><br><span class="line">					printf(&quot;client ip=%s port=%d\n&quot;,</span><br><span class="line">							inet_ntop(AF_INET,&amp;cliaddr.sin_addr.s_addr,ip,INET_ADDRSTRLEN),</span><br><span class="line">							ntohs(cliaddr.sin_port));</span><br><span class="line">					//cfd设置为非阻塞</span><br><span class="line">					int flag = fcntl(cfd,F_GETFL);</span><br><span class="line">					flag |= O_NONBLOCK;</span><br><span class="line">					fcntl(cfd,F_SETFL,flag);</span><br><span class="line">					//cfd上树监听</span><br><span class="line">					ev.data.fd = cfd;</span><br><span class="line">					ev.events = EPOLLIN;</span><br><span class="line">					epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&amp;ev);</span><br><span class="line"></span><br><span class="line">				</span><br><span class="line">				&#125;</span><br><span class="line">				else if( evs[i].events &amp; EPOLLIN)//cfd变化</span><br><span class="line">				&#123;</span><br><span class="line">					client_request(&amp;evs[i],epfd);</span><br><span class="line">				</span><br><span class="line">				&#125;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//收尾</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <hr>
+<p>title: http_server<br>date: 2019-06-24 20:35:20</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;sys/epoll.h&gt;</p>
+<p>#include “wrap.h”</p>
+<p>#include &lt;fcntl.h&gt;</p>
+<p>#include &lt;dirent.h&gt;</p>
+<p>#include “pub.h”</p>
+<p>#include &lt;signal.h&gt;</p>
+<p>#include &lt;sys/stat.h&gt;</p>
+<p>#define PORT 8888</p>
+<p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
+    char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);<br>    //文件大小<br>    if(length &gt; 0)<br>    {<br>        len = sprintf(buf,”Content-Length:%d\r\n”,length);<br>        send(cfd,buf,len,0);<br>    }<br>    //空行<br>    send(cfd,”\r\n”,2,0);</p>
+<p>}
+void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>{
+    int fd = open(pathname,O_RDWR);<br>    if(fd &lt; 0)<br>    {<br>        perror(“”);<br>        return ;<br>    }<br>    while(1)<br>    {<br>        char buf[1024]=””;<br>        int n = read(fd,buf,sizeof(buf));<br>        if(n &lt;=0)<br>            break;</p>
+<pre><code>    int count = send(cfd,buf,n,0);
+    printf(&quot;count =%d\n&quot;,count);
+}
+close(fd);
+
+if(flag == 1)
+{
+
+    close(cfd);
+    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
+
+}</code></pre><p>}
+void client_request(struct epoll_event *ev,int epfd)<br>{
+    int cfd = ev-&gt;data.fd;<br>    char buf[1024]=””;<br>    char tmp[1024]=””;<br>    int n = Readline(cfd,buf,sizeof(buf));<br>    if(n &lt;= 0)<br>    {<br>        close(cfd);<br>        epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);<br>    }</p>
+<p>//    printf(“buf=[%s]\n”,buf);<br>    //将缓冲读干净<br>    while( (n=Readline(cfd,tmp,sizeof(tmp))) &gt; 0);<br>    //GET /  HTTP1.1\R\N<br>    char mothod[256],content[256];<br>    sscanf(buf,”%[^ ] %[^ ]”,mothod,content);<br>    printf(“[%s]   [%s]\n”,mothod,content);<br>    //如果是get请求处理<br>    if( strcasecmp(mothod,”get”) == 0)<br>    {<br>        // %e8%b8%…txt<br>        char <em>strfile = content+1;<br>        strdecode( strfile,strfile);<br>        if(</em>strfile == 0)<br>            strfile = “./“;//如果没有请求文件,默认请求当前目录<br>        //判断请求的文件是否存在<br>        struct stat s;<br>        int ret = stat(strfile,&amp;s);<br>        if(ret &lt; 0)//文件不存在<br>        {<br>            //发送信息头<br>        //void send_header(int cfd ,int code,char <em>info,char *filetype,int length)<br>        send_header(cfd,404,”NOT FOUND”,get_mime_type(“</em>.html”),0);<br>        //void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>        //发送error.html<br>        send_file(cfd,ev,”error.html”,1,epfd);</p>
+<pre><code>    }
+    else//文件存在
+    {
+        //如果是一个常规文件
+        if(S_ISREG(s.st_mode))
+        {
+            //发送信息头
+            send_header(cfd,200,&quot;OK&quot;,get_mime_type(strfile),s.st_size);
+            //发送文件内容
+
+            send_file(cfd,ev,strfile,1,epfd);
+        }
+        else if(S_ISDIR(s.st_mode))//如果是一个目录
+        {
+            //发送信息头
+             send_header(cfd,200,&quot;OK&quot;,get_mime_type(&quot;*.html&quot;),0);
+            //发送dir_header.html
+            send_file(cfd,ev,&quot;dir_header.html&quot;,0,epfd);
+            //发送列表
+            //先要得到 目录下的文件名
+            struct dirent **list;
+            int size = scandir(strfile,&amp;list,NULL,alphasort);
+            for(int i=0;i&lt;size;i++)
+            {
+                // list[i]-&gt;d_name
+                char buff[256]=&quot;&quot;;
+                int len =0;
+                if( list[i]-&gt;d_type == DT_DIR)
+                {
+                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s/&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
+
+                }
+                else
+                {
+                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
+                }
+                send(cfd,buff,len,0);
+                free(list[i]);
+            }
+            free(list);
+
+            //发送dir_tail.html
+            send_file(cfd,ev,&quot;dir_tail.html&quot;,1,epfd);
 
 
+        }
+
+    }
+}
+else
+{
+    //其他请求 暂时不处理
+    close(cfd);
+    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
+
+
+}</code></pre><p>}</p>
+<p>int main(int argc, char <em>argv[])<br>{
+    signal(SIGPIPE,SIG_IGN);<br>    //切换工作路径<br>    char path[256]=””;<br>    char *pwd = getenv(“PWD”);<br>    ///home/itheima/share/shangc++01/1617day<br>    strcpy(path,pwd);<br>    strcat(path,”/web-http”);<br>    chdir(path);<br>    //创建套接字 绑定<br>    int lfd = tcp4bind(PORT,NULL);<br>    //监听<br>    Listen(lfd,128);<br>    //创建树<br>    int epfd = epoll_create(1);<br>    //lfd上树<br>    struct epoll_event ev,evs[EPOLL_SIZE];<br>    ev.data.fd = lfd;<br>    ev.events = EPOLLIN;<br>    epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&amp;ev);<br>    //循环监听<br>    while(1)<br>    {<br>        int n = epoll_wait(epfd,evs,EPOLL_SIZE,-1);<br>        if(n &lt; 0)<br>        {<br>            perror(“”);<br>            break;<br>        }<br>        else<br>        {<br>            for(int i=0;i&lt;n;i++)<br>            {<br>                // lfd变化<br>                if(evs[i].data.fd == lfd &amp;&amp; evs[i].events &amp; EPOLLIN)<br>                {<br>                    struct sockaddr_in cliaddr;<br>                    char ip[INET_ADDRSTRLEN]=””;<br>                    socklen_t len = sizeof(cliaddr);<br>                    //提取链接<br>                    int cfd = Accept(lfd,(struct sockaddr</em>)&amp;cliaddr,&amp;len);<br>                    printf(“client ip=%s port=%d\n”,<br>                            inet_ntop(AF_INET,&amp;cliaddr.sin_addr.s_addr,ip,INET_ADDRSTRLEN),<br>                            ntohs(cliaddr.sin_port));<br>                    //cfd设置为非阻塞<br>                    int flag = fcntl(cfd,F_GETFL);<br>                    flag |= O_NONBLOCK;<br>                    fcntl(cfd,F_SETFL,flag);<br>                    //cfd上树监听<br>                    ev.data.fd = cfd;<br>                    ev.events = EPOLLIN;<br>                    epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&amp;ev);</p>
+<pre><code>            }
+            else if( evs[i].events &amp; EPOLLIN)//cfd变化
+            {
+                client_request(&amp;evs[i],epfd);
+
+            }
+
+
+        }
+
+    }
+}
+//收尾
+return 0;</code></pre><p>}</p>
+<pre><code></code></pre>
       
 
       
@@ -255,8 +357,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2019/06/24/epoll-http-server/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">epoll_http_server</div>
+    <a href="/2019/06/21/Tcp三次握手/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Tcp三次握手</div>
       <i class="icon-circle-right"></i>
     </a>
   
