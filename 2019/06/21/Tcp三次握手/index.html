@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="HuYa的博客">
 <meta property="og:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞 等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handsha">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T12:06:52.344Z">
+<meta property="og:updated_time" content="2019-07-01T10:58:01.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tcp三次握手">
 <meta name="twitter:description" content="1、 服务器调用socket()、bind()、listen()完成初始化后，调用accept()阻塞等待，处于监听端口的状态，客户端调用socket()初始化后，调用connect()发出SYN段并阻塞 等待服务器应答，服务器应答一个SYN-ACK段，客户端收到后从connect()返回，同时应 答一个ACK段，服务器收到后从accept()返回。 2、三次握手Three-way Handsha">
@@ -187,7 +187,10 @@
 
 注意: 一个 SYN包就是仅SYN标记设为1的TCP包(参见TCP包头Resources). 认识   到这点很重要，只有当A受到B发来的SYN包，才可建立连接，除此之外别无他法。因此，
 
-如果你的防火墙丢弃所有的发往外网接口的SYN包，那么你将不能让外部任何主机主动建立连接。  </code></pre><p>2.2. (B) &lt;– [SYN/ACK] &lt;–(A)  </p>
+如果你的防火墙丢弃所有的发往外网接口的SYN包，那么你将不能让外部任何主机主动建立连接。  </code></pre><a id="more"></a>
+
+
+<p>2.2. (B) &lt;– [SYN/ACK] &lt;–(A)  </p>
 <pre><code>接着，A收到后会发一个对SYN包的确认包(SYN/ACK)回去，表示对第一个SYN包的确   认，并继续握手操作.  
 
 注意: SYN/ACK包是仅SYN 和 ACK 标记为1的包.  </code></pre><p>2.3. (B) –&gt; [ACK] –&gt; (A)  </p>
