@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="HuYa的博客">
 <meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #define EPOLL_SIZE 1024int main(int argc, char *argv[]){     if(argc &amp;lt; 2)    {        printf(“argc &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-01T10:45:07.782Z">
+<meta property="og:updated_time" content="2019-07-01T10:56:42.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="epoll 多路IO复用">
 <meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #define EPOLL_SIZE 1024int main(int argc, char *argv[]){     if(argc &amp;lt; 2)    {        printf(“argc &amp;">
@@ -184,9 +184,8 @@
 <p>#include &lt;fcntl.h&gt;</p>
 <p>#define EPOLL_SIZE 1024<br>int main(int argc, char *argv[])<br>{
     if(argc &lt; 2)<br>    {<br>        printf(“argc &lt;2   :  ./a.out port \n”);<br>        return 0;</p>
-<pre><code>}
-&lt;!--more--&gt;
-// 创建套接字
+<pre><code>}</code></pre><a id="more"></a>
+<pre><code>// 创建套接字
 int lfd = tcp4bind( atoi(argv[1]),NULL );
 // 绑定 
 // 监听
