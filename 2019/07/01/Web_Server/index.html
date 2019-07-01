@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Mytest | HuYa的博客</title>
+  <title>Web_Server | HuYa的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Mytest">
-<meta property="og:url" content="http://yoursite.com/2019/07/01/Mytest/index.html">
+  <meta name="description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web_Server">
+<meta property="og:url" content="http://yoursite.com/2019/07/01/Web_Server/index.html">
 <meta property="og:site_name" content="HuYa的博客">
+<meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-01T10:38:56.307Z">
+<meta property="og:updated_time" content="2019-07-01T11:16:54.165Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mytest">
+<meta name="twitter:title" content="Web_Server">
+<meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
   
     <link rel="alternative" href="/atom.xml" title="HuYa的博客" type="application/atom+xml">
   
@@ -155,19 +158,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Mytest" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Web_Server" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Mytest
+      Web_Server
     </h1>
   
 
         
-        <a href="/2019/07/01/Mytest/" class="archive-article-date">
+        <a href="/2019/07/01/Web_Server/" class="archive-article-date">
   	<time datetime="2019-07-01T10:38:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
 </a>
         
@@ -175,7 +178,110 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;sys/epoll.h&gt;</p>
+<p>#include “wrap.h”</p>
+<p>#include &lt;fcntl.h&gt;</p>
+<p>#include &lt;dirent.h&gt;</p>
+<p>#include “pub.h”</p>
+<p>#include &lt;signal.h&gt;</p>
+<p>#include &lt;sys/stat.h&gt;</p>
+<p>#define PORT 8888</p>
+<p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
+    char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);<br>    //文件大小<br>    if(length &gt; 0)<br>    {<br>        len = sprintf(buf,”Content-Length:%d\r\n”,length);<br>        send(cfd,buf,len,0);<br>    }<br>    //空行<br>    send(cfd,”\r\n”,2,0);</p>
+<p>}</p>
+<a id="more"></a>
+<p>void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>{
+    int fd = open(pathname,O_RDWR);<br>    if(fd &lt; 0)<br>    {<br>        perror(“”);<br>        return ;<br>    }<br>    while(1)<br>    {<br>        char buf[1024]=””;<br>        int n = read(fd,buf,sizeof(buf));<br>        if(n &lt;=0)<br>            break;</p>
+<pre><code>    int count = send(cfd,buf,n,0);
+    printf(&quot;count =%d\n&quot;,count);
+}
+close(fd);
+
+if(flag == 1)
+{
+
+    close(cfd);
+    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
+
+}</code></pre><p>}
+void client_request(struct epoll_event *ev,int epfd)<br>{
+    int cfd = ev-&gt;data.fd;<br>    char buf[1024]=””;<br>    char tmp[1024]=””;<br>    int n = Readline(cfd,buf,sizeof(buf));<br>    if(n &lt;= 0)<br>    {<br>        close(cfd);<br>        epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);<br>    }</p>
+<p>//    printf(“buf=[%s]\n”,buf);<br>    //将缓冲读干净<br>    while( (n=Readline(cfd,tmp,sizeof(tmp))) &gt; 0);<br>    //GET /  HTTP1.1\R\N<br>    char mothod[256],content[256];<br>    sscanf(buf,”%[^ ] %[^ ]”,mothod,content);<br>    printf(“[%s]   [%s]\n”,mothod,content);<br>    //如果是get请求处理<br>    if( strcasecmp(mothod,”get”) == 0)<br>    {<br>        // %e8%b8%…txt<br>        char <em>strfile = content+1;<br>        strdecode( strfile,strfile);<br>        if(</em>strfile == 0)<br>            strfile = “./“;//如果没有请求文件,默认请求当前目录<br>        //判断请求的文件是否存在<br>        struct stat s;<br>        int ret = stat(strfile,&amp;s);<br>        if(ret &lt; 0)//文件不存在<br>        {<br>            //发送信息头<br>        //void send_header(int cfd ,int code,char <em>info,char *filetype,int length)<br>        send_header(cfd,404,”NOT FOUND”,get_mime_type(“</em>.html”),0);<br>        //void send_file(int cfd, struct epoll_event *ev,char *pathname,int flag,int epfd)<br>        //发送error.html<br>        send_file(cfd,ev,”error.html”,1,epfd);</p>
+<pre><code>    }
+    else//文件存在
+    {
+        //如果是一个常规文件
+        if(S_ISREG(s.st_mode))
+        {
+            //发送信息头
+            send_header(cfd,200,&quot;OK&quot;,get_mime_type(strfile),s.st_size);
+            //发送文件内容
+
+            send_file(cfd,ev,strfile,1,epfd);
+        }
+        else if(S_ISDIR(s.st_mode))//如果是一个目录
+        {
+            //发送信息头
+             send_header(cfd,200,&quot;OK&quot;,get_mime_type(&quot;*.html&quot;),0);
+            //发送dir_header.html
+            send_file(cfd,ev,&quot;dir_header.html&quot;,0,epfd);
+            //发送列表
+            //先要得到 目录下的文件名
+            struct dirent **list;
+            int size = scandir(strfile,&amp;list,NULL,alphasort);
+            for(int i=0;i&lt;size;i++)
+            {
+                // list[i]-&gt;d_name
+                char buff[256]=&quot;&quot;;
+                int len =0;
+                if( list[i]-&gt;d_type == DT_DIR)
+                {
+                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s/&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
+
+                }
+                else
+                {
+                    len = sprintf(buff,&quot;&lt;li&gt;&lt;a href=%s&gt;%s&lt;a&gt;&lt;/li&gt;&quot;,list[i]-&gt;d_name,list[i]-&gt;d_name);
+                }
+                send(cfd,buff,len,0);
+                free(list[i]);
+            }
+            free(list);
+
+            //发送dir_tail.html
+            send_file(cfd,ev,&quot;dir_tail.html&quot;,1,epfd);
+
+
+        }
+
+    }
+}
+else
+{
+    //其他请求 暂时不处理
+    close(cfd);
+    epoll_ctl(epfd,EPOLL_CTL_DEL,cfd,ev);
+
+
+}</code></pre><p>}</p>
+<p>int main(int argc, char <em>argv[])<br>{
+    signal(SIGPIPE,SIG_IGN);<br>    //切换工作路径<br>    char path[256]=””;<br>    char *pwd = getenv(“PWD”);<br>    ///home/itheima/share/shangc++01/1617day<br>    strcpy(path,pwd);<br>    strcat(path,”/web-http”);<br>    chdir(path);<br>    //创建套接字 绑定<br>    int lfd = tcp4bind(PORT,NULL);<br>    //监听<br>    Listen(lfd,128);<br>    //创建树<br>    int epfd = epoll_create(1);<br>    //lfd上树<br>    struct epoll_event ev,evs[EPOLL_SIZE];<br>    ev.data.fd = lfd;<br>    ev.events = EPOLLIN;<br>    epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&amp;ev);<br>    //循环监听<br>    while(1)<br>    {<br>        int n = epoll_wait(epfd,evs,EPOLL_SIZE,-1);<br>        if(n &lt; 0)<br>        {<br>            perror(“”);<br>            break;<br>        }<br>        else<br>        {<br>            for(int i=0;i&lt;n;i++)<br>            {<br>                // lfd变化<br>                if(evs[i].data.fd == lfd &amp;&amp; evs[i].events &amp; EPOLLIN)<br>                {<br>                    struct sockaddr_in cliaddr;<br>                    char ip[INET_ADDRSTRLEN]=””;<br>                    socklen_t len = sizeof(cliaddr);<br>                    //提取链接<br>                    int cfd = Accept(lfd,(struct sockaddr</em>)&amp;cliaddr,&amp;len);<br>                    printf(“client ip=%s port=%d\n”,<br>                            inet_ntop(AF_INET,&amp;cliaddr.sin_addr.s_addr,ip,INET_ADDRSTRLEN),<br>                            ntohs(cliaddr.sin_port));<br>                    //cfd设置为非阻塞<br>                    int flag = fcntl(cfd,F_GETFL);<br>                    flag |= O_NONBLOCK;<br>                    fcntl(cfd,F_SETFL,flag);<br>                    //cfd上树监听<br>                    ev.data.fd = cfd;<br>                    ev.events = EPOLLIN;<br>                    epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&amp;ev);</p>
+<pre><code>            }
+            else if( evs[i].events &amp; EPOLLIN)//cfd变化
+            {
+                client_request(&amp;evs[i],epfd);
+
+            }
+
+
+        }
+
+    }
+}
+//收尾
+return 0;</code></pre><p>}</p>
+
       
 
       
@@ -254,7 +360,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/01/Mytest/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/01/Web_Server/" alt="微信分享二维码">
     </div>
 </div>
 
