@@ -156,40 +156,26 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Web_Server" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-gsajshj" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/01/Web_Server/">Web_Server</a>
+      <a class="article-title" href="/2019/07/05/gsajshj/">gsajshj</a>
     </h1>
   
 
         
-        <a href="/2019/07/01/Web_Server/" class="archive-article-date">
-  	<time datetime="2019-07-01T10:38:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
+        <a href="/2019/07/05/gsajshj/" class="archive-article-date">
+  	<time datetime="2019-07-05T10:17:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;sys/epoll.h&gt;</p>
-<p>#include “wrap.h”</p>
-<p>#include &lt;fcntl.h&gt;</p>
-<p>#include &lt;dirent.h&gt;</p>
-<p>#include “pub.h”</p>
-<p>#include &lt;signal.h&gt;</p>
-<p>#include &lt;sys/stat.h&gt;</p>
-<p>#define PORT 8888</p>
-<p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
-    char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);<br>    //文件大小<br>    if(length &gt; 0)<br>    {<br>        len = sprintf(buf,”Content-Length:%d\r\n”,length);<br>        send(cfd,buf,len,0);<br>    }<br>    //空行<br>    send(cfd,”\r\n”,2,0);</p>
-<p>}</p>
-        
-          <a class="article-more-a" href="/2019/07/01/Web_Server/#more">&lt;!--more--&gt; >></a>
         
       
 
@@ -202,7 +188,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/01/Web_Server/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/05/gsajshj/">展开全文 >></a>
         </p>
       
 
@@ -320,7 +306,7 @@
 </tbody></table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设置行宽：set linesize 120;</span><br><span class="line">设置页面：set pagesize 100;</span><br><span class="line">或者将上述两行写入如下两个配置文件，可永久设置：</span><br><span class="line">C:\app\Administrator\product\11.2.0\client_1\sqlplus\admin\glogin.sql </span><br><span class="line">C:\app\Administrator\product\11.2.0\dbhome_1\sqlplus\admin\glogin.sql</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2019/07/01/SQL基础学习/#more">&lt;!--more--&gt; >></a>
+          <a class="article-more-a" href="/2019/07/05/SQL基础学习/#more">&lt;!--more--&gt; >></a>
         
       
 
@@ -333,7 +319,83 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/01/SQL基础学习/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/05/SQL基础学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Web_Server" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/01/Web_Server/">Web_Server</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/01/Web_Server/" class="archive-article-date">
+  	<time datetime="2019-07-01T10:38:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;sys/epoll.h&gt;</p>
+<p>#include “wrap.h”</p>
+<p>#include &lt;fcntl.h&gt;</p>
+<p>#include &lt;dirent.h&gt;</p>
+<p>#include “pub.h”</p>
+<p>#include &lt;signal.h&gt;</p>
+<p>#include &lt;sys/stat.h&gt;</p>
+<p>#define PORT 8888</p>
+<p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
+    char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);<br>    //文件大小<br>    if(length &gt; 0)<br>    {<br>        len = sprintf(buf,”Content-Length:%d\r\n”,length);<br>        send(cfd,buf,len,0);<br>    }<br>    //空行<br>    send(cfd,”\r\n”,2,0);</p>
+<p>}</p>
+        
+          <a class="article-more-a" href="/2019/07/01/Web_Server/#more">&lt;!--more--&gt; >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/01/Web_Server/">展开全文 >></a>
         </p>
       
 
