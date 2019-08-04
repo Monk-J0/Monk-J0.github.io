@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Web_Server | HuYa的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
+  <meta name="description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web_Server">
 <meta property="og:url" content="http://yoursite.com/2019/07/01/Web_Server/index.html">
 <meta property="og:site_name" content="HuYa的博客">
-<meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
+<meta property="og:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-04T09:08:47.085Z">
+<meta property="og:updated_time" content="2019-08-04T09:11:20.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web_Server">
-<meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt; #defin">
+<meta name="twitter:description" content="#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/epoll.h&amp;gt; #include “wrap.h” #include &amp;lt;fcntl.h&amp;gt; #include &amp;lt;dirent.h&amp;gt; #include “pub.h” #include &amp;lt;signal.h&amp;gt; #include &amp;lt;sys/stat.h&amp;gt;">
   
     <link rel="alternative" href="/atom.xml" title="HuYa的博客" type="application/atom+xml">
   
@@ -186,11 +186,10 @@
 <p>#include “pub.h”</p>
 <p>#include &lt;signal.h&gt;</p>
 <p>#include &lt;sys/stat.h&gt;</p>
+<a id="more"></a>
 <p>#define PORT 8888</p>
 <p>#define EPOLL_SIZE 1024<br>void send_header(int cfd ,int code,char *info,char *filetype,int length)<br>{
     char buf[1024]=””;<br>    //发送状态行<br>    int len = sprintf(buf,”HTTP/1.1 %d %s\r\n”,code,info);<br>    send(cfd,buf,len,0);<br>    //状态信息 文件类型<br>    len = sprintf(buf,”Content-Type:%s\r\n”,filetype);<br>    send(cfd,buf,len,0);</p>
-<a id="more"></a>
-
 <pre><code>//文件大小
 if(length &gt; 0)
 {
